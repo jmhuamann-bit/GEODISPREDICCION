@@ -38,6 +38,11 @@
       <input class="form-check-input" type="checkbox" id="capaAlertas" checked>
       <label class="form-check-label" for="capaAlertas" style="font-size:13px;">Alertas Críticas</label>
     </div>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="capaEventos" checked>
+      <label class="form-check-label" for="capaEventos" style="font-size:13px;">Eventos en Vivo (Bogotá)</label>
+    </div>
+    <button class="gd-btn gd-btn-outline gd-btn-sm" id="btnRefrescarEventos"><i class="fa-solid fa-rotate"></i> Refrescar eventos</button>
     <div class="ms-auto gd-map-legend d-flex gap-3">
       <span><span class="gd-dot verde"></span>Riesgo bajo</span>
       <span><span class="gd-dot amarillo"></span>Riesgo medio</span>
@@ -46,9 +51,31 @@
   </div>
 </div>
 
-<div class="gd-card">
-  <div class="gd-card-body p-2">
-    <div id="gdMap"></div>
+<div class="row g-3 mb-3" id="gdWeatherRow"></div>
+
+<div class="row g-3">
+  <div class="col-12 col-xl-8">
+    <div class="gd-card">
+      <div class="gd-card-body p-2">
+        <div id="gdMap"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4">
+    <div class="gd-card h-100">
+      <div class="gd-card-header">
+        <div>
+          <div class="gd-card-title">Eventos en Vivo — Bogotá</div>
+          <div class="gd-card-subtitle" id="gdEventosSubtitle">Cargando...</div>
+        </div>
+      </div>
+      <div class="gd-card-body" id="gdEventosLista" style="max-height:60vh;overflow-y:auto;font-size:12.5px;"></div>
+      <div class="gd-card-body pt-0" style="font-size:11px;color:var(--gd-text-subtle);border-top:1px solid var(--gd-border);">
+        <i class="fa-solid fa-circle-info me-1"></i>
+        Detectado por reglas de palabras clave (NLP-lite) sobre RSS reales de El Tiempo Bogotá y Bogotá.gov.co —
+        no es un modelo de lenguaje entrenado. Una sola fuente sin confirmar nunca alcanza confianza alta.
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

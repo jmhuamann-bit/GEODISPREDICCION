@@ -3,5 +3,6 @@ from models.shipment import Shipment
 from models.alert import Alert
 from models.audit_log import AuditLog
 from models.ml_model import MLModelRun
+from models.event import Event
 
-__all__ = ["User", "ROLES", "Shipment", "Alert", "AuditLog", "MLModelRun"]
+__all__ = ["User", "ROLES", "Shipment", "Alert", "AuditLog", "MLModelRun", "Event"]
