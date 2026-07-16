@@ -1,0 +1,35 @@
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Variables de entorno y secretos (NUNCA subir a git)
+.env
+.env.local
+
+# Datos generados en tiempo de ejecucion (base de datos local, modelos entrenados)
+instance/
+
+# Logs
+logs/
+*.log
+
+# Archivos subidos por usuarios (mantener la carpeta, ignorar el contenido)
+uploads/*
+!uploads/.gitkeep
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Migraciones de Flask-Migrate (se generan localmente la primera vez con `flask db init`)
+# migrations/

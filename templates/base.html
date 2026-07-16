@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}GEODIS Decision Intelligence Platform{% endblock %}</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a1f44%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 fill=%22%2300c2b2%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-weight=%22bold%22>G</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/theme.css') }}" rel="stylesheet">
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+<div class="gd-shell">
+  <aside class="gd-sidebar" id="gdSidebar">
+    <div class="gd-brand">
+      <div class="gd-brand-mark"><i class="fa-solid fa-diagram-project"></i></div>
+      <div class="gd-brand-text">
+        <span class="gd-brand-title">GEODIS</span>
+        <span class="gd-brand-sub">Decision Intelligence</span>
+      </div>
+    </div>
+
+    <nav class="gd-nav">
+      <div class="gd-nav-group">Vista General</div>
+      <a href="{{ url_for('web.dashboard') }}" class="gd-nav-link {{ 'active' if active_page == 'dashboard' }}"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <a href="{{ url_for('web.monitoreo') }}" class="gd-nav-link {{ 'active' if active_page == 'monitoreo' }}"><i class="fa-solid fa-satellite-dish"></i><span>Centro de Monitoreo</span></a>
+      <a href="{{ url_for('web.mapa') }}" class="gd-nav-link {{ 'active' if active_page == 'mapa' }}"><i class="fa-solid fa-map-location-dot"></i><span>Mapa Inteligente</span></a>
+
+      <div class="gd-nav-group">Inteligencia Artificial</div>
+      <a href="{{ url_for('web.predicciones') }}" class="gd-nav-link {{ 'active' if active_page == 'predicciones' }}"><i class="fa-solid fa-brain"></i><span>Predicciones IA</span></a>
+      <a href="{{ url_for('web.contingencias') }}" class="gd-nav-link {{ 'active' if active_page == 'contingencias' }}"><i class="fa-solid fa-triangle-exclamation"></i><span>Contingencias</span></a>
+      <a href="{{ url_for('web.simulador') }}" class="gd-nav-link {{ 'active' if active_page == 'simulador' }}"><i class="fa-solid fa-sliders"></i><span>Simulador</span></a>
+      <a href="{{ url_for('web.chat') }}" class="gd-nav-link {{ 'active' if active_page == 'chat' }}"><i class="fa-solid fa-comments"></i><span>Chat IA</span></a>
+
+      <div class="gd-nav-group">Operación</div>
+      <a href="{{ url_for('web.embarques') }}" class="gd-nav-link {{ 'active' if active_page == 'embarques' }}"><i class="fa-solid fa-truck-fast"></i><span>Embarques</span></a>
+      <a href="{{ url_for('web.clientes') }}" class="gd-nav-link {{ 'active' if active_page == 'clientes' }}"><i class="fa-solid fa-building-user"></i><span>Clientes</span></a>
+      <a href="{{ url_for('web.kpis_page') }}" class="gd-nav-link {{ 'active' if active_page == 'kpis' }}"><i class="fa-solid fa-chart-line"></i><span>KPIs</span></a>
+      <a href="{{ url_for('web.reportes') }}" class="gd-nav-link {{ 'active' if active_page == 'reportes' }}"><i class="fa-solid fa-file-export"></i><span>Reportes</span></a>
+
+      <div class="gd-nav-group">Sistema</div>
+      <a href="{{ url_for('web.configuracion') }}" class="gd-nav-link {{ 'active' if active_page == 'configuracion' }}"><i class="fa-solid fa-gears"></i><span>Configuración</span></a>
+      <a href="{{ url_for('web.perfil') }}" class="gd-nav-link {{ 'active' if active_page == 'perfil' }}"><i class="fa-solid fa-user-gear"></i><span>Perfil</span></a>
+      <a href="{{ url_for('web.ayuda') }}" class="gd-nav-link {{ 'active' if active_page == 'ayuda' }}"><i class="fa-solid fa-circle-question"></i><span>Ayuda / Manual</span></a>
+    </nav>
+  </aside>
+
+  <div class="gd-main">
+    <header class="gd-topbar">
+      <button class="gd-icon-btn d-lg-none" id="gdSidebarToggle" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+      <div class="gd-topbar-title">{% block page_title %}{% endblock %}</div>
+      <div class="gd-topbar-actions">
+        <span class="gd-env-badge"><i class="fa-solid fa-database"></i> Datos reales · 22,000 embarques</span>
+        <button class="gd-icon-btn" id="gdThemeToggle" title="Cambiar tema"><i class="fa-solid fa-moon"></i></button>
+        <div class="gd-user-menu dropdown">
+          <button class="gd-user-btn dropdown-toggle" data-bs-toggle="dropdown">
+            <span class="gd-avatar" id="gdUserAvatar">--</span>
+            <span class="gd-user-info d-none d-md-flex">
+              <span class="gd-user-name" id="gdUserName">Cargando...</span>
+              <span class="gd-user-role" id="gdUserRole">&nbsp;</span>
+            </span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="{{ url_for('web.perfil') }}"><i class="fa-solid fa-user me-2"></i>Mi perfil</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('web.ayuda') }}"><i class="fa-solid fa-circle-question me-2"></i>Ayuda</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#" id="gdLogoutBtn"><i class="fa-solid fa-right-from-bracket me-2"></i>Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main class="gd-content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

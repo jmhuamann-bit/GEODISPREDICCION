@@ -1,0 +1,98 @@
+﻿Variable,Tipo_de_Dato,Unidad_de_Medida,Fuente_Publica_de_Referencia,Descripcion
+ID_Viaje,Identificador,Texto (código),Interno GEODIS (simulado),"Identificador único del viaje/envío, formato GDS-AAAA-NNNNNN."
+Fecha,Numérica (fecha),AAAA-MM-DD,Interno GEODIS (simulado),Fecha en que se despacha el viaje.
+Día_Semana,Categórica,Texto,Interno GEODIS (simulado),Día de la semana correspondiente a la fecha del viaje.
+Mes,Categórica,Texto,Interno GEODIS (simulado),Mes calendario del viaje.
+Trimestre,Ordinal,Entero (1-4),Interno GEODIS (simulado),Trimestre del año calendario.
+Año,Numérica (discreta),Año (AAAA),Interno GEODIS (simulado),Año calendario del viaje (2023-2025).
+Departamento_Origen,Categórica,Texto,DANE / IGAC (división político-administrativa),Departamento colombiano donde se origina el viaje.
+Municipio_Origen,Categórica,Texto,DANE / IGAC (división político-administrativa),"Municipio o ciudad nodo de origen (incluye los puertos de Buenaventura, Cartagena, Barranquilla y Santa Marta)."
+Departamento_Destino,Categórica,Texto,DANE / IGAC (división político-administrativa),Departamento colombiano de destino del viaje.
+Municipio_Destino,Categórica,Texto,DANE / IGAC (división político-administrativa),Municipio o ciudad nodo de destino.
+Corredor_Logístico,Categórica,Texto,ANI / Mintransporte (red de corredores logísticos),Nombre del corredor origen-destino (par de ciudades nodo).
+Ruta_Principal,Categórica,Texto,INVÍAS / ANI (red vial nacional),"Vía troncal o corredor físico principal utilizado (p. ej. Ruta del Sol, Autopista al Mar, Panamericana)."
+Tipo_Transporte,Categórica,Texto (Carretero/Marítimo/Aéreo),Mintransporte / DIMAR / Aerocivil,Modo de transporte utilizado en el viaje.
+Tipo_Vehículo,Categórica,Texto,Mintransporte (RNDC) / DIMAR / Aerocivil,"Tipo de vehículo, buque o aeronave asociado al modo de transporte."
+Tipo_Carga,Categórica,Texto,"Interno GEODIS (simulado, sectores declarados por GEODIS)",Categoría de la mercancía transportada.
+Sector_Cliente,Categórica,Texto,"Interno GEODIS (simulado, sectores declarados por GEODIS)","Sector económico del cliente (tecnología, retail, consumo masivo, industrial, automotriz, salud)."
+Peso_Toneladas,Numérica continua,Toneladas,Superintendencia de Transporte (límites de peso por eje),Peso bruto de la carga transportada en el viaje.
+Volumen_m3,Numérica continua,Metros cúbicos (m³),Interno GEODIS (simulado),Volumen de la carga transportada.
+Distancia_Km,Numérica continua,Kilómetros,INVÍAS / ANI / SICE-TAC (distancias de referencia de la red vial),Distancia recorrida entre el nodo de origen y el de destino.
+Tiempo_Programado_Horas,Numérica continua,Horas,GEODIS / SICE-TAC (tiempos de tránsito de referencia),"Tiempo de tránsito comprometido (SLA) para el viaje, según distancia, modo y tipo de operación."
+Tiempo_Entrega_Real_Horas,Numérica continua,Horas,"Interno GEODIS (simulado, TMS/GPS)",Tiempo total real transcurrido entre el despacho y la entrega.
+Velocidad_Promedio_Kmh,Numérica continua,Km/h,SICE-TAC / Mintransporte,Velocidad promedio efectiva del viaje según el modo de transporte.
+Tiempo_Espera_Horas,Numérica continua,Horas,"Interno GEODIS (simulado, TMS/GPS)","Tiempo adicional de espera no planeado (colas, congestión, trámites) durante el viaje."
+Consumo_Combustible_Galones,Numérica continua,Galones,Mintransporte / UPME (rendimientos de referencia),"Combustible consumido en el viaje (diésel para carretero/marítimo, equivalente para aéreo)."
+Costo_Transporte_COP,Numérica continua,COP (pesos colombianos),"Interno GEODIS (simulado, tarifas relativas por distancia/modo/vehículo)",Costo total de transporte del viaje (flete).
+Costo_Peajes_COP,Numérica continua,COP,ANI (tarifas de peaje por categoría vehicular),Costo estimado de peajes para viajes por carretera.
+Disponibilidad_Flota_Pct,Numérica continua,Porcentaje (%),"Interno GEODIS (simulado, KPI de flota)",Porcentaje de la flota de transporte disponible al momento del despacho.
+Utilización_Flota_Pct,Numérica continua,Porcentaje (%),"Interno GEODIS (simulado, KPI de flota)",Porcentaje de utilización/ocupación de la flota disponible.
+Estado_Vía,Ordinal,Categoría (Bueno < Regular < Malo < Crítico),INVÍAS (estado de la red vial nacional),Estado general de la vía principal utilizada en el viaje.
+Índice_Deterioro_Vial,Numérica continua,Índice 0-100 (mayor = peor estado),INVÍAS (índice de estado de la red vial),Índice compuesto de deterioro de la infraestructura vial del corredor.
+Número_Cierres_Viales,Numérica discreta (conteo),Número de eventos,INVÍAS (reportes de cierres viales),Número de cierres viales registrados en el corredor durante el viaje.
+Número_Bloqueos_Carretera,Numérica discreta (conteo),Número de eventos,INVÍAS / Policía Nacional (reportes de bloqueos),"Número de bloqueos de vía (protestas, derrumbes, etc.) que afectaron el corredor."
+Índice_Bloqueos,Numérica continua,Índice 0-100,INVÍAS / Policía Nacional,Índice compuesto de afectación por bloqueos y cierres viales.
+Obras_Viales_Activas,Numérica discreta (conteo),Número de obras,INVÍAS (plan de obras activas),Número de obras viales activas en el corredor.
+Restricciones_Peso,Binaria,"0 = No, 1 = Sí",Mintransporte / Superintendencia de Transporte,Indica si aplicaron restricciones de peso al vehículo en el viaje.
+Restricciones_Horarias,Binaria,"0 = No, 1 = Sí","Mintransporte (pico y placa de carga, restricciones urbanas)",Indica si aplicaron restricciones horarias de circulación.
+Índice_Seguridad,Numérica continua,Índice 0-100 (mayor = más seguro),Policía Nacional / Ministerio de Defensa,Índice compuesto de seguridad vial y de carga en el corredor.
+Riesgo_Hurto_Carga,Ordinal,Categoría (Bajo < Medio < Alto),Policía Nacional (estadísticas de hurto a mercancías),Nivel de riesgo de hurto de carga en el corredor y tipo de mercancía.
+Número_Eventos_Seguridad,Numérica discreta (conteo),Número de eventos,Policía Nacional / Ministerio de Defensa,"Número de eventos de seguridad (hurtos, retenes ilegales, incidentes) reportados."
+Presencia_Grupos_Armados,Binaria,"0 = No, 1 = Sí",Ministerio de Defensa (zonas de influencia de grupos armados),Indica presencia reportada de grupos armados ilegales en la zona del corredor.
+Índice_Orden_Público,Numérica continua,Índice 0-100 (mayor = mejor orden público),Ministerio de Defensa / Policía Nacional,Índice compuesto de orden público de la región del corredor.
+Riesgo_Extorsión,Ordinal,Categoría (Bajo < Medio < Alto),Policía Nacional / Ministerio de Defensa,Nivel de riesgo de extorsión asociado al corredor.
+Riesgo_Vandalismo,Ordinal,Categoría (Bajo < Medio < Alto),Policía Nacional,Nivel de riesgo de vandalismo sobre la carga o el vehículo.
+Riesgo_Saqueo,Ordinal,Categoría (Bajo < Medio < Alto),Policía Nacional / UNGRD,"Nivel de riesgo de saqueo de la carga, asociado a bloqueos y protestas."
+Número_Paros,Numérica discreta (conteo),Número de eventos,Ministerio del Interior / Policía Nacional (registro de paros),"Número de paros (nacionales, regionales o gremiales) activos que afectaron el viaje."
+Índice_Protestas,Numérica continua,Índice 0-100,Ministerio del Interior / Policía Nacional,Índice de intensidad de protestas y movilizaciones sociales en el corredor.
+Manifestaciones,Numérica discreta (conteo),Número de eventos,Policía Nacional (registro de manifestaciones públicas),Número de manifestaciones públicas registradas durante el viaje.
+Huelgas,Binaria,"0 = No, 1 = Sí",Ministerio del Trabajo / Ministerio del Interior,Indica si hubo una huelga activa que afectó la operación.
+Bloqueos_Sociales,Numérica discreta (conteo),Número de eventos,UNGRD / Policía Nacional,Número de bloqueos de origen social (no vial-estructural) en el corredor.
+Temperatura_C,Numérica continua,Grados Celsius (°C),IDEAM (registros climatológicos),Temperatura promedio registrada en el corredor durante el viaje.
+Precipitación_mm,Numérica continua,Milímetros (mm),IDEAM (registros de precipitación),Precipitación acumulada estimada en el día del viaje.
+Humedad_Pct,Numérica continua,Porcentaje (%),IDEAM,Humedad relativa promedio registrada en el corredor.
+Velocidad_Viento_Kmh,Numérica continua,Km/h,IDEAM,Velocidad promedio del viento registrada en el corredor.
+Alerta_IDEAM,Ordinal,Categoría (Ninguna < Amarilla < Naranja < Roja),IDEAM (sistema de alertas tempranas),Nivel de alerta meteorológica vigente durante el viaje.
+Fenómeno_Climático,Categórica,Texto,IDEAM (boletines de fenómenos climáticos y ENSO),"Fenómeno climático predominante (El Niño, La Niña, vaguada, ola de calor, etc.)."
+Número_Inundaciones,Numérica discreta (conteo),Número de eventos,UNGRD (registro de emergencias),Número de inundaciones reportadas en la zona del corredor.
+Índice_Inundaciones,Numérica continua,Índice 0-100,UNGRD / IDEAM,Índice de afectación por inundaciones en el corredor.
+Número_Deslizamientos,Numérica discreta (conteo),Número de eventos,UNGRD (registro de emergencias),Número de deslizamientos de tierra reportados en el corredor.
+Índice_Deslizamientos,Numérica continua,Índice 0-100,UNGRD,Índice de afectación por deslizamientos en el corredor.
+Número_Derrumbes,Numérica discreta (conteo),Número de eventos,UNGRD / INVÍAS (registro de emergencias viales),Número de derrumbes que afectaron la vía utilizada.
+Índice_Derrumbes,Numérica continua,Índice 0-100,UNGRD / INVÍAS,Índice de afectación por derrumbes en el corredor.
+Número_Incendios_Forestales,Numérica discreta (conteo),Número de eventos,UNGRD / IDEAM (registro de incendios de cobertura vegetal),Número de incendios forestales activos cerca del corredor.
+Índice_Incendios,Numérica continua,Índice 0-100,UNGRD / IDEAM,Índice de afectación por incendios forestales.
+Riesgo_Geológico,Ordinal,Categoría (Bajo < Medio < Alto),UNGRD / Servicio Geológico Colombiano,Nivel de riesgo geológico (deslizamientos/derrumbes) del corredor.
+Riesgo_Hidrológico,Ordinal,Categoría (Bajo < Medio < Alto),UNGRD / IDEAM,Nivel de riesgo hidrológico (inundaciones) del corredor.
+Número_Accidentes,Numérica discreta (conteo),Número de eventos,Policía Nacional / ANSV (Agencia Nacional de Seguridad Vial),Número de accidentes de tránsito registrados durante el viaje.
+Intensidad_Incidente,Ordinal,Categoría (Ninguno < Leve < Moderado < Grave),Policía Nacional / ANSV,Severidad del incidente vial más relevante del viaje.
+Duración_Incidente_Horas,Numérica continua,Horas,Policía Nacional / ANSV,Duración estimada del incidente vial reportado.
+Tiempo_Cierre_Vía_Horas,Numérica continua,Horas,INVÍAS / Policía Nacional,Tiempo total que la vía permaneció cerrada por incidentes o bloqueos.
+Precio_Diésel_COP_Gal,Numérica continua,COP por galón,Mintransporte / DANE (precios de combustibles),Precio de referencia del ACPM/diésel vigente en la fecha del viaje.
+Precio_Gasolina_COP_Gal,Numérica continua,COP por galón,Mintransporte / DANE,Precio de referencia de la gasolina corriente vigente en la fecha del viaje.
+IPC,Numérica continua,Índice (base 100 = ene-2023),DANE (Índice de Precios al Consumidor),Índice de precios al consumidor vigente en el mes del viaje.
+TRM_COP_USD,Numérica continua,COP por USD,Banco de la República / DANE,Tasa representativa del mercado (TRM) vigente en la fecha del viaje.
+Inflación_Pct,Numérica continua,Porcentaje anual (%),DANE,Inflación anual (variación interanual del IPC) vigente en el mes del viaje.
+Precio_Peajes_Promedio_COP,Numérica continua,COP por peaje,ANI (tarifas de peaje por categoría vehicular),Tarifa promedio de peaje aplicable según categoría vehicular.
+Índice_Abastecimiento,Numérica continua,Índice 0-100,SIPSA / Corabastos (DANE),Índice de abastecimiento de la cadena de suministro relacionada con la carga.
+Nivel_Inventario_Pct,Numérica continua,Porcentaje (%) de capacidad,Interno GEODIS / SIPSA-Corabastos (simulado),Nivel de inventario disponible en el nodo de origen o bodega asociada.
+Demanda_Unidades,Numérica continua,Unidades,SIPSA / Corabastos / Interno GEODIS (simulado),Demanda real estimada para el tipo de carga y periodo del viaje.
+Demanda_Pronosticada_Unidades,Numérica continua,Unidades,"Interno GEODIS (simulado, pronóstico de demanda)","Demanda pronosticada previa al viaje, con error de pronóstico respecto a la demanda real."
+Prioridad_Cliente,Ordinal,Categoría (Estándar < Alta < Crítica/Estratégico),Interno GEODIS (segmentación comercial de clientes),Nivel de prioridad comercial y de servicio asignado al cliente.
+OTIF,Binaria,"0 = No cumplido, 1 = Cumplido",Interno GEODIS (KPI On Time In Full),Indica si el viaje cumplió la entrega a tiempo y completa (OTIF) dentro de la tolerancia SLA.
+Fill_Rate_Pct,Numérica continua,Porcentaje (%),Interno GEODIS (KPI de completitud de pedido),Porcentaje de la carga solicitada que fue efectivamente despachada.
+Nivel_Servicio_Pct,Numérica continua,Porcentaje (%),Interno GEODIS (KPI compuesto de nivel de servicio),"Indicador compuesto de nivel de servicio (OTIF, fill rate y seguridad)."
+Tiempo_Almacenamiento_Horas,Numérica continua,Horas,"Interno GEODIS (Contract Logistics, simulado)",Tiempo que la carga permaneció almacenada en bodega antes de su despacho final.
+Cross_Docking,Binaria,"0 = No, 1 = Sí",Interno GEODIS (operación de cross-docking),Indica si el viaje utilizó una operación de cross-docking.
+Tipo_Bodega,Categórica,Texto,"Interno GEODIS (Contract Logistics, simulado)",Tipo de bodega asociada al almacenamiento de la carga.
+Capacidad_Bodega_m3,Numérica continua,Metros cúbicos (m³),Interno GEODIS (simulado),Capacidad instalada de la bodega o nodo de almacenamiento asociado.
+Utilización_Bodega_Pct,Numérica continua,Porcentaje (%),Interno GEODIS (KPI de bodega),Porcentaje de utilización de la capacidad de bodega disponible.
+Aseguradora,Categórica,Texto,Mercado asegurador colombiano de carga (no es fuente pública oficial; supuesto de mercado),Compañía aseguradora que ampara la carga transportada en el viaje.
+Tipo_Cobertura_Seguro,Ordinal,Categoría (Básica < RC Transportador < Todo Riesgo),Supuesto de mercado (pólizas de transporte de mercancías en Colombia),Nivel de cobertura de la póliza de seguro de carga contratada para el viaje.
+Valor_Asegurado_COP,Numérica continua,COP,"Supuesto de mercado, derivado de Peso_Toneladas y Tipo_Carga",Valor asegurado de la mercancía transportada en el viaje.
+Prima_Seguro_COP,Numérica continua,COP,Supuesto de mercado (tasas típicas de seguro de transporte de mercancías),"Costo de la prima del seguro para el viaje, en función del valor asegurado, la cobertura y el riesgo del corredor."
+Deducible_COP,Numérica continua,COP,Supuesto de mercado (condicionado por el tipo de cobertura),Monto deducible a cargo de GEODIS/cliente en caso de siniestro.
+Siniestro,Binaria,"0 = No, 1 = Sí","Supuesto de mercado, ligado a Riesgo_Hurto_Carga, Riesgo_Saqueo y Número_Accidentes","Indica si se presentó un siniestro (pérdida, daño o hurto) de la carga durante el viaje."
+Valor_Siniestro_COP,Numérica continua,COP,Supuesto de mercado (severidad del siniestro sobre el valor asegurado),Valor reclamado del siniestro; 0 si no hubo siniestro.
+Estado_Reclamación,Categórica,Texto (No Aplica/Pagada/En Trámite/Rechazada),Supuesto de mercado (proceso típico de reclamación de seguros),Estado de la reclamación ante la aseguradora; 'No Aplica' si no hubo siniestro.
+LeadTime_Real_Dias,Numérica continua (variable objetivo),Días,Interno GEODIS (KPI Lead Time),"Tiempo total real de entrega del viaje, en días, desde el despacho hasta la entrega. Variable objetivo del modelo predictivo: depende de distancia, estado de la vía, congestión, bloqueos, paros, seguridad, clima, derrumbes, inundaciones, incendios forestales, disponibilidad de flota, accidentes, tiempo de espera, nivel de inventario y tipo de transporte, con relaciones no lineales y ruido operativo."

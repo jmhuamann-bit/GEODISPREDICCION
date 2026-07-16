@@ -1,0 +1,33 @@
+# Blueprint de Render — Infraestructura como código.
+# Al conectar este repositorio en https://dashboard.render.com/blueprints, Render lee este
+# archivo automáticamente y crea el servicio web + la base de datos PostgreSQL sin configuración
+# manual adicional. Cada `git push` a la rama conectada dispara un nuevo deploy automático.
+
+databases:
+  - name: geodispredice-db
+    databaseName: geodispredice
+    plan: free
+    postgresMajorVersion: 16
+
+services:
+  - type: web
+    name: geodispredice
+    runtime: python
+    plan: free
+    branch: main
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app --workers 2 --threads 4 --timeout 120"
+    healthCheckPath: /login
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FLASK_ENV
+        value: production
+      - key: RISK_ALERT_THRESHOLD_PCT
+        value: "80"
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      - key: DATABASE_URL
+        fromDatabase:
+          name: geodispredice-db
+          property: connectionString

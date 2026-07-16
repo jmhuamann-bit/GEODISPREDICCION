@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block title %}Ayuda · GEODIS{% endblock %}
+{% block page_title %}Centro de Ayuda{% endblock %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-lg-8">
+    <div class="gd-card">
+      <div class="gd-card-header">
+        <div>
+          <div class="gd-card-title">Manual de Usuario — GEODIS Decision Intelligence Platform</div>
+          <div class="gd-card-subtitle">Guía paso a paso de cada módulo</div>
+        </div>
+      </div>
+      <div class="gd-card-body">
+        <div class="accordion" id="gdHelpAccordion">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#h1">1. Dashboard Ejecutivo</button></h2>
+            <div id="h1" class="accordion-collapse collapse show" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                Muestra los indicadores clave de la operación: <strong>Lead Time</strong> (tiempo real de entrega en días),
+                <strong>OTIF</strong> (% de embarques entregados a tiempo y completos), <strong>costo promedio</strong>,
+                <strong>CO₂ estimado</strong> (a partir del consumo de combustible), <strong>nivel de servicio</strong>,
+                <strong>contingencias activas</strong> y la <strong>distribución de riesgo</strong> de todos los embarques.
+                Use los filtros de año y tipo de transporte en la parte superior para acotar la vista.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h2">2. Centro de Monitoreo</button></h2>
+            <div id="h2" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                Tabla operativa de todos los embarques con filtros por cliente, origen, destino, corredor, transporte,
+                prioridad y nivel de riesgo. El <strong>semáforo de riesgo</strong> funciona así:
+                <span class="gd-badge verde ms-1"><span class="gd-dot verde"></span>Bajo</span>
+                <span class="gd-badge amarillo ms-1"><span class="gd-dot amarillo"></span>Medio</span>
+                <span class="gd-badge rojo ms-1"><span class="gd-dot rojo"></span>Alto/Crítico</span>.
+                Puede exportar los resultados filtrados a CSV con el botón "Exportar CSV".
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h3">3. Cómo interpretar el Nivel de Riesgo</button></h2>
+            <div id="h3" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                El riesgo es la probabilidad de <strong>incumplimiento de OTIF</strong> estimada por el modelo de
+                Regresión Logística de Predicciones IA, entrenado sobre variables de vía, seguridad, clima, orden
+                social y economía conocibles antes del despacho. Se expresa de 0 a 100%. Cuando supera el
+                <strong>80%</strong> se genera automáticamente una <strong>Alerta Crítica</strong>, visible en
+                Dashboard, Centro de Monitoreo, Mapa y Panel de Contingencias.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h4">4. Predicciones IA</button></h2>
+            <div id="h4" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                Entrena un modelo de Regresión Logística sobre los 22,000 embarques reales para predecir la
+                probabilidad de incumplimiento OTIF. Muestra importancia de variables, curva ROC, matriz de
+                confusión y métricas (Accuracy, Precision, Recall, F1, AUC) medidas siempre sobre un 20% de
+                embarques que el modelo nunca vio. El botón "Reentrenar modelo" (roles Analista/Administrador)
+                vuelve a entrenar, aplica las nuevas probabilidades a todos los embarques y regenera las Alertas
+                Críticas. Arquitectura preparada para comparar Random Forest, XGBoost, LightGBM y otros algoritmos.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h5">5. Simulador</button></h2>
+            <div id="h5" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                Cambie corredor, transporte, vehículo, carga, prioridad, peso, volumen, disponibilidad de flota,
+                alerta climática o estado de la vía, y el resultado se recalcula en vivo: Nuevo Lead Time y Costo
+                (regresores Ridge entrenados sobre el dataset real) y Nuevo OTIF Esperado / Nivel de Riesgo
+                (modelo de Predicciones IA). Incluye comparación contra el promedio histórico del corredor elegido.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h6">6. Mapa Inteligente</button></h2>
+            <div id="h6" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                Mapa de Colombia (Leaflet/OpenStreetMap) con tres capas activables: <strong>Rutas</strong>
+                (corredores coloreados por riesgo promedio), <strong>Nodos</strong> (ciudades, con marca especial
+                para puertos y aeropuertos principales) y <strong>Alertas Críticas</strong>. Filtre por tipo de
+                transporte y haga clic en cualquier ruta o ciudad para ver sus estadísticas.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h7">7. Chat IA</button></h2>
+            <div id="h7" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                Asistente conversacional que responde sobre OTIF, Lead Time, contingencias, el modelo de
+                Predicciones IA, corredores de riesgo, clientes, o el estado de un embarque específico (escriba su
+                ID, ej. GDS-2024-000123). Actualmente basado en reglas sobre los datos reales; preparado para
+                conectarse a un modelo de lenguaje en una fase posterior.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h8">8. Embarques, Clientes y KPIs Detallados</button></h2>
+            <div id="h8" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                <strong>Embarques</strong>: CRUD completo — cada embarque creado o editado recibe de inmediato su
+                probabilidad de riesgo del modelo de IA activo. <strong>Clientes</strong>: el dataset no trae
+                identidad de cliente, así que se segmenta por Sector × Prioridad con OTIF, costo y riesgo por
+                segmento. <strong>KPIs Detallados</strong>: desagregación por transporte, prioridad y comparativo
+                histórico trimestral.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h9">9. Panel de Contingencias</button></h2>
+            <div id="h9" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                Gestiona el ciclo de vida de cada alerta: <strong>Abierta → En Gestión → Resuelta</strong>. Incluye
+                las alertas automáticas del modelo de IA y las contingencias creadas manualmente (botón "Nueva
+                Contingencia"). El detalle de cada alerta muestra los canales de notificación preparados (Email,
+                WhatsApp Business, Microsoft Teams, Slack) — se activan configurando credenciales en el servidor,
+                sin cambios de código.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h10">10. Exportar Reportes</button></h2>
+            <div id="h10" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                Desde <strong>Reportes</strong>: panel ejecutivo en PDF y el Centro de Monitoreo completo en Excel.
+                Desde el <strong>Centro de Monitoreo</strong>: exportación CSV de la vista filtrada actual.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#h11">11. Configuración</button></h2>
+            <div id="h11" class="accordion-collapse collapse" data-bs-parent="#gdHelpAccordion">
+              <div class="accordion-body">
+                Solo Administrador: gestión de usuarios y roles (activar/desactivar), umbral de Alerta Crítica del
+                modelo de IA, estado de las integraciones externas preparadas, y bitácora de auditoría de acciones
+                sensibles (login, cambios de configuración, CRUD de embarques, contingencias).
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <div class="gd-card mb-3">
+      <div class="gd-card-header"><div class="gd-card-title">Preguntas frecuentes</div></div>
+      <div class="gd-card-body" style="font-size:13px;">
+        <p><strong>¿De dónde vienen los datos?</strong><br>Del dataset histórico real GEODIS Colombia (22,000 embarques, 2023-2025), documentado en el diccionario de datos oficial del proyecto.</p>
+        <p><strong>¿Puedo cambiar de tema claro/oscuro?</strong><br>Sí, con el ícono de luna/sol en la barra superior.</p>
+        <p><strong>¿Qué significa OTIF?</strong><br>On Time In Full: el embarque llegó a tiempo y completo según el SLA acordado.</p>
+        <p class="mb-0"><strong>¿Cómo reporto un problema?</strong><br>Contacte al administrador de la plataforma desde su equipo de TI de GEODIS.</p>
+      </div>
+    </div>
+    <div class="gd-card">
+      <div class="gd-card-header"><div class="gd-card-title">Roles de la plataforma</div></div>
+      <div class="gd-card-body" style="font-size:13px;line-height:2;">
+        <span class="gd-badge gris">Administrador</span> Acceso total, configuración y usuarios<br>
+        <span class="gd-badge gris">Supervisor</span> Supervisión operativa y contingencias<br>
+        <span class="gd-badge gris">Operaciones</span> Gestión diaria de embarques<br>
+        <span class="gd-badge gris">Analista</span> Predicciones IA y reportes<br>
+        <span class="gd-badge gris">Cliente</span> Consulta de sus propios embarques
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

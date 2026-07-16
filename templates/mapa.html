@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Mapa Inteligente · GEODIS{% endblock %}
+{% block page_title %}Mapa Inteligente{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  #gdMap { height: calc(100vh - 172px); min-height: 480px; width: 100%; border-radius: var(--gd-radius); z-index: 1; }
+  .gd-map-legend { font-size: 12px; }
+  .gd-map-legend .gd-dot { margin-right: 6px; }
+  .leaflet-popup-content-wrapper { border-radius: 10px; }
+  .gd-popup-title { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+  .gd-popup-row { font-size: 12px; color: #475569; margin-bottom: 2px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="gd-card mb-3">
+  <div class="gd-card-body d-flex flex-wrap gap-3 align-items-end">
+    <div>
+      <label class="gd-label">Tipo de transporte</label>
+      <select class="form-select gd-input" id="mapTransporte" style="min-width:160px;">
+        <option value="">Todos</option>
+        <option value="Carretero">Carretero</option>
+        <option value="Marítimo">Marítimo</option>
+        <option value="Aéreo">Aéreo</option>
+      </select>
+    </div>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="capaRutas" checked>
+      <label class="form-check-label" for="capaRutas" style="font-size:13px;">Rutas</label>
+    </div>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="capaNodos" checked>
+      <label class="form-check-label" for="capaNodos" style="font-size:13px;">Ciudades / Nodos</label>
+    </div>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="capaAlertas" checked>
+      <label class="form-check-label" for="capaAlertas" style="font-size:13px;">Alertas Críticas</label>
+    </div>
+    <div class="ms-auto gd-map-legend d-flex gap-3">
+      <span><span class="gd-dot verde"></span>Riesgo bajo</span>
+      <span><span class="gd-dot amarillo"></span>Riesgo medio</span>
+      <span><span class="gd-dot rojo"></span>Riesgo alto/crítico</span>
+    </div>
+  </div>
+</div>
+
+<div class="gd-card">
+  <div class="gd-card-body p-2">
+    <div id="gdMap"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{{ url_for('static', filename='js/mapa.js') }}"></script>
+{% endblock %}

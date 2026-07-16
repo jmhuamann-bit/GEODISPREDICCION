@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Contingencias · GEODIS{% endblock %}
+{% block page_title %}Panel de Contingencias{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-3" id="gdContSummaryRow"></div>
+
+<div class="gd-card mb-3">
+  <div class="gd-card-body d-flex flex-wrap gap-2 align-items-end">
+    <div>
+      <label class="gd-label">Buscar ID de viaje</label>
+      <input type="text" class="form-control gd-input" id="fContBusqueda" placeholder="GDS-2024-000123">
+    </div>
+    <div>
+      <label class="gd-label">Estado</label>
+      <select class="form-select gd-input" id="fContEstado" style="min-width:150px;">
+        <option value="">Todos</option>
+        <option value="Abierta">Abierta</option>
+        <option value="En Gestion">En Gestión</option>
+        <option value="Resuelta">Resuelta</option>
+      </select>
+    </div>
+    <div>
+      <label class="gd-label">Severidad</label>
+      <select class="form-select gd-input" id="fContSeveridad" style="min-width:140px;">
+        <option value="">Todas</option>
+        <option value="Critica">Crítica</option>
+        <option value="Alta">Alta</option>
+        <option value="Media">Media</option>
+        <option value="Baja">Baja</option>
+      </select>
+    </div>
+    <div>
+      <label class="gd-label">Origen</label>
+      <select class="form-select gd-input" id="fContTipo" style="min-width:170px;">
+        <option value="">Todos</option>
+        <option value="prediccion_ia">Predicción IA</option>
+        <option value="contingencia_manual">Contingencia manual</option>
+      </select>
+    </div>
+    <button class="gd-btn gd-btn-accent ms-auto" id="btnNuevaContingencia"><i class="fa-solid fa-plus"></i> Nueva Contingencia</button>
+  </div>
+</div>
+
+<div class="gd-card">
+  <div class="gd-card-header">
+    <div><div class="gd-card-title">Alertas y Contingencias</div><div class="gd-card-subtitle" id="gdContTotal">Cargando...</div></div>
+  </div>
+  <div class="gd-table-wrap" style="border:none;max-height:55vh;">
+    <table class="gd-table">
+      <thead><tr><th>Severidad</th><th>Título</th><th>ID Viaje</th><th>Origen</th><th>Probabilidad</th><th>Estado</th><th>Creada</th><th></th></tr></thead>
+      <tbody id="gdContBody"></tbody>
+    </table>
+  </div>
+  <div class="gd-card-body d-flex justify-content-between align-items-center">
+    <div id="gdContPaginaInfo" style="font-size:12.5px;color:var(--gd-text-muted);"></div>
+    <div class="d-flex gap-2">
+      <button class="gd-btn gd-btn-outline gd-btn-sm" id="btnContAnterior"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+      <button class="gd-btn gd-btn-outline gd-btn-sm" id="btnContSiguiente">Siguiente <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalContingencia" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nueva Contingencia Manual</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="gdContFormError" class="alert alert-danger py-2 px-3" style="display:none;font-size:13px;"></div>
+        <div class="mb-2"><label class="gd-label">Título *</label><input class="form-control gd-input" id="cTitulo" placeholder="Ej. Bloqueo vial en la Ruta del Sol"></div>
+        <div class="mb-2"><label class="gd-label">ID de viaje (opcional)</label><input class="form-control gd-input" id="cIdViaje" placeholder="GDS-2024-000123"></div>
+        <div class="mb-2"><label class="gd-label">Severidad</label>
+          <select class="form-select gd-input" id="cSeveridad">
+            <option value="Critica">Crítica</option>
+            <option value="Alta" selected>Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
+          </select>
+        </div>
+        <div class="mb-2"><label class="gd-label">Descripción</label><textarea class="form-control gd-input" id="cDescripcion" rows="3"></textarea></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="gd-btn gd-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="gd-btn gd-btn-primary" id="btnGuardarContingencia">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalDetalle" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalle de la Alerta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="gdDetalleBody" style="font-size:13.5px;"></div>
+      <div class="modal-footer" id="gdDetalleFooter"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/contingencias.js') }}"></script>
+{% endblock %}

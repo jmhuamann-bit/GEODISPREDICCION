@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Predicciones IA · GEODIS{% endblock %}
+{% block page_title %}Predicciones IA{% endblock %}
+
+{% block content %}
+<div id="gdNoModel" class="gd-construction" style="display:none;">
+  <i class="fa-solid fa-brain"></i>
+  <h3>Aún no se ha entrenado ningún modelo</h3>
+  <p style="max-width:480px;">Entrena el modelo de Regresión Logística sobre los 22,000 embarques reales para empezar a predecir el riesgo de incumplimiento OTIF.</p>
+  <button class="gd-btn gd-btn-accent mt-2" id="btnEntrenarVacio"><i class="fa-solid fa-play"></i> Entrenar modelo ahora</button>
+</div>
+
+<div id="gdModelContent" style="display:none;">
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div>
+      <div style="font-size:13px;color:var(--gd-text-muted);">
+        Modelo activo: <strong id="gdAlgoLabel">—</strong> ·
+        entrenado el <span id="gdFechaEntrenamiento">—</span> ·
+        versión <span class="gd-mono" id="gdVersion">—</span>
+      </div>
+    </div>
+    <button class="gd-btn gd-btn-accent" id="btnReentrenar"><i class="fa-solid fa-rotate"></i> Reentrenar modelo</button>
+  </div>
+
+  <div class="row g-3 mb-3" id="gdMetricRow"></div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-12 col-xl-7">
+      <div class="gd-card h-100">
+        <div class="gd-card-header">
+          <div>
+            <div class="gd-card-title">Curva ROC</div>
+            <div class="gd-card-subtitle">Capacidad del modelo para distinguir embarques que incumplirán OTIF (conjunto de prueba, datos no vistos)</div>
+          </div>
+        </div>
+        <div class="gd-card-body"><canvas id="chartRoc" height="220"></canvas></div>
+      </div>
+    </div>
+    <div class="col-12 col-xl-5">
+      <div class="gd-card h-100">
+        <div class="gd-card-header">
+          <div>
+            <div class="gd-card-title">Matriz de Confusión</div>
+            <div class="gd-card-subtitle">Aciertos y errores sobre el conjunto de prueba</div>
+          </div>
+        </div>
+        <div class="gd-card-body" id="gdConfusionMatrix"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-12 col-xl-7">
+      <div class="gd-card h-100">
+        <div class="gd-card-header">
+          <div>
+            <div class="gd-card-title">Importancia de Variables</div>
+            <div class="gd-card-subtitle">Top 15 variables con mayor efecto en la predicción (coeficiente estandarizado)</div>
+          </div>
+        </div>
+        <div class="gd-card-body"><canvas id="chartImportancia" height="280"></canvas></div>
+      </div>
+    </div>
+    <div class="col-12 col-xl-5">
+      <div class="gd-card h-100">
+        <div class="gd-card-header">
+          <div>
+            <div class="gd-card-title">Embarques de mayor riesgo</div>
+            <div class="gd-card-subtitle">Top 20 según probabilidad de incumplimiento</div>
+          </div>
+        </div>
+        <div class="gd-table-wrap" style="border:none;max-height:340px;">
+          <table class="gd-table">
+            <thead><tr><th>ID Viaje</th><th>Corredor</th><th>Riesgo</th><th>OTIF real</th></tr></thead>
+            <tbody id="gdTopRiesgoBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gd-card mt-3">
+    <div class="gd-card-body" style="font-size:12.5px;color:var(--gd-text-muted);">
+      <i class="fa-solid fa-circle-info me-1"></i>
+      El modelo se evalúa con un 20% de embarques que nunca vio durante el entrenamiento (conjunto de prueba),
+      para reportar métricas honestas. Las variables usadas son únicamente las conocibles antes o al momento del
+      despacho (ruta, transporte, clima, vía, seguridad, orden social, economía) — se excluyen deliberadamente el
+      tiempo real de entrega, incidentes del propio viaje y otras variables posteriores al hecho, para evitar fuga
+      de datos. Cuando la probabilidad supera el {{ '80' }}% se genera automáticamente una Alerta Crítica.
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/predicciones.js') }}"></script>
+{% endblock %}
