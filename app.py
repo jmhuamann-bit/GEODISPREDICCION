@@ -90,6 +90,7 @@ def register_blueprints(app: Flask) -> None:
     from routes.chat import bp as chat_bp
     from routes.admin import bp as admin_bp
     from routes.contingencies import bp as contingencies_bp
+    from routes.system import bp as system_bp
 
     app.register_blueprint(web_bp)
     app.register_blueprint(auth_bp)
@@ -105,6 +106,7 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(chat_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(contingencies_bp)
+    app.register_blueprint(system_bp)
 
 
 def register_error_handlers(app: Flask) -> None:

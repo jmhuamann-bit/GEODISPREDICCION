@@ -31,3 +31,5 @@ services:
         fromDatabase:
           name: geodispredice-db
           property: connectionString
+      - key: BOOTSTRAP_TOKEN
+        generateValue: true
